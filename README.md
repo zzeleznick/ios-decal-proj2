@@ -2,6 +2,8 @@
 
 ## Due 
 Part 1: Thursday, March 10 at 11:59 PM 
+
+
 Part 2: Thursday, March 17 at 11:59 PM
 
 ## Description 
