@@ -1,0 +1,20 @@
+Part One:
+  - a. Divide layout into grid
+    - Top half:
+        - hangman
+        - Category Tile:
+          - i.e. Celebrities, History, Science, Sports, Idioms
+        - blanks
+    - Bottom half:
+        - letter container
+        - running score
+
+  - b. Create letter container
+    - Perhaps segment on Vowels, Common, Uncommon
+    - Vowels:
+      - a,e,i,o,u,y
+    - Common:
+      - b,c,d,g,h,k,l
+      - m,n,p,r,s,t,v,
+    - Uncommon:
+      - f,j,q,w,x,z
