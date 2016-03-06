@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10089" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10072.1"/>
     </dependencies>
     <scenes>
         <!--Game View Controller-->
@@ -16,11 +16,58 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4o8-FG-adw">
+                                <rect key="frame" x="125" y="150" width="350" height="300"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vowels" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DOC-g8-1cR">
+                                        <rect key="frame" x="10" y="10" width="47.5" height="19.5"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Common" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CIG-bN-mCt">
+                                        <rect key="frame" x="10" y="89" width="60.5" height="19.5"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uncommon" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lPr-BN-HVb">
+                                        <rect key="frame" x="10" y="209" width="77" height="19.5"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.086813253160000006" blue="0.31406612449999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="lPr-BN-HVb" firstAttribute="top" secondItem="CIG-bN-mCt" secondAttribute="bottom" constant="100" id="Bf7-dF-7Lk"/>
+                                    <constraint firstItem="CIG-bN-mCt" firstAttribute="leading" secondItem="4o8-FG-adw" secondAttribute="leading" constant="10" id="Hef-d9-cyB"/>
+                                    <constraint firstAttribute="width" constant="350" id="Q9d-GH-tbz"/>
+                                    <constraint firstAttribute="height" constant="300" id="akf-BB-8Kg"/>
+                                    <constraint firstItem="DOC-g8-1cR" firstAttribute="leading" secondItem="4o8-FG-adw" secondAttribute="leading" constant="10" id="fRW-sQ-27X"/>
+                                    <constraint firstItem="CIG-bN-mCt" firstAttribute="top" secondItem="DOC-g8-1cR" secondAttribute="bottom" constant="60" id="gHA-kA-E0h"/>
+                                    <constraint firstItem="lPr-BN-HVb" firstAttribute="leading" secondItem="4o8-FG-adw" secondAttribute="leading" constant="10" id="m9s-4j-Fdl"/>
+                                    <constraint firstItem="DOC-g8-1cR" firstAttribute="top" secondItem="4o8-FG-adw" secondAttribute="top" constant="10" id="wCh-dP-Kw7"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4o8-FG-adw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MtB-u2-zEk"/>
+                            <constraint firstItem="4o8-FG-adw" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="bT3-aL-EAJ"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="commonLabel" destination="CIG-bN-mCt" id="EKz-oW-LTm"/>
+                        <outlet property="letterContainer" destination="4o8-FG-adw" id="CZg-t6-Isd"/>
+                        <outlet property="uncommonLabel" destination="lPr-BN-HVb" id="K3j-nU-ARl"/>
+                        <outlet property="vowelLabel" destination="DOC-g8-1cR" id="aym-sU-V48"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="216" y="340"/>
         </scene>
     </scenes>
 </document>
