@@ -14,6 +14,7 @@ class GameViewController: UIViewController {
     let commons1 = ["b","c","d","g","h","k","l"]
     let commons2 = ["m","n","p","r","s","t","v"]
     let uncommon = ["f","j","q","w","x","z"]
+    var status: String = "is error"
     var phrase: String = ""
     var guessed: [String] = [" "]
     let maxTries: Int = 7
@@ -29,6 +30,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var statsContainer: UIView!
     @IBOutlet weak var wordView: UIView!
     
+    @IBOutlet weak var hangmanImage: UIImageView!
     @IBOutlet weak var commonLabel: UILabel!
     @IBOutlet weak var vowelLabel: UILabel!
     @IBOutlet weak var uncommonLabel: UILabel!
@@ -51,21 +53,21 @@ class GameViewController: UIViewController {
     
     func updateWordLabel() {
         var replaced = ""
+        var winner: Bool = true
         for i in phrase.characters {
-            /* if i == " " {
-            replaced.appendContentsOf("  ")
-            }
-            else {
-            replaced.appendContentsOf("*")
-            }*/
             if guessed.contains(String(i)) {
                 replaced.appendContentsOf(String(i))
             }
             else {
+                winner = false
                 replaced.appendContentsOf("*")
             }
         }
         wordToGuess?.text = replaced
+        if winner {
+            self.status = "YOU WIN"
+            goForward()
+        }
     }
     
     func setupWord() {
@@ -88,12 +90,28 @@ class GameViewController: UIViewController {
         }
         else {
             print("phrase does not contain guess \(guess)")
+            currentTries += 1
+            if currentTries >= maxTries {
+                print("YOU LOSE")
+                self.status = "YOU LOSE"
+                goForward()
+            }
+            else {
+                remainingGuesses.text = "\(maxTries - currentTries)"
+                hangmanImage.image =  UIImage(named: "hangman\(currentTries+1)")
+            }
         }
         updateWordLabel()
         sender.backgroundColor = UIColor.grayColor()
         sender.enabled = false
         self.view.layoutIfNeeded()
-        
+    }
+    
+    func goForward() {
+        /* let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let newVC = storyboard.instantiateViewControllerWithIdentifier("EndGame")  as UIViewController?
+        self.presentViewController(newVC!, animated: true, completion: nil) */
+        performSegueWithIdentifier("EndTheGame", sender: self)
     }
     
     func makeButtons(content: [String], margin: CGFloat, bottom: CGFloat, width: CGFloat = 45.0) {
@@ -155,15 +173,11 @@ class GameViewController: UIViewController {
         makeButtons(uncommon, margin: margin, bottom: bottom)
     }
     
-
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let dest : EndGameViewController = segue.destinationViewController as! EndGameViewController
+        dest.status = self.status
     }
-    */
 
 }
