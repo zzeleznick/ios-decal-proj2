@@ -14,7 +14,10 @@ class GameViewController: UIViewController {
     let commons1 = ["b","c","d","g","h","k","l"]
     let commons2 = ["m","n","p","r","s","t","v"]
     let uncommon = ["f","j","q","w","x","z"]
-    
+    var phrase: String = ""
+    var guessed: [String] = [" "]
+    let maxTries: Int = 7
+    var currentTries: Int = 0
     var vowelButtons: [UIButton!]!
     var button2: UIButton!
     var buttonOn: Bool = false
@@ -29,19 +32,16 @@ class GameViewController: UIViewController {
     @IBOutlet weak var commonLabel: UILabel!
     @IBOutlet weak var vowelLabel: UILabel!
     @IBOutlet weak var uncommonLabel: UILabel!
-    
+    @IBOutlet weak var remainingGuesses: UILabel!
     @IBOutlet weak var wordToGuess: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let hangmanPhrases = HangmanPhrases()
-        let phrase = hangmanPhrases.getRandomPhrase()
-        print(phrase)
         makeVowelButtons()
         makeCommonButtons()
         makeUncommonButtons()
-        wordToGuess?.text = phrase
+        setupWord()
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,12 +49,47 @@ class GameViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func updateWordLabel() {
+        var replaced = ""
+        for i in phrase.characters {
+            /* if i == " " {
+            replaced.appendContentsOf("  ")
+            }
+            else {
+            replaced.appendContentsOf("*")
+            }*/
+            if guessed.contains(String(i)) {
+                replaced.appendContentsOf(String(i))
+            }
+            else {
+                replaced.appendContentsOf("*")
+            }
+        }
+        wordToGuess?.text = replaced
+    }
+    
+    func setupWord() {
+        let hangmanPhrases = HangmanPhrases()
+        phrase = hangmanPhrases.getRandomPhrase().lowercaseString
+        print(phrase)
+        updateWordLabel()
+    }
+    
     class myButton: UIButton {
         var content: String = ""
     }
     
     func buttonPressed(sender: myButton) {
-        print("button \(sender.content) pressed")
+        let guess = sender.content
+        print("button \(guess) pressed")
+        if phrase.containsString(guess) {
+            print("phrase contains guess \(guess)")
+            guessed.append(guess)
+        }
+        else {
+            print("phrase does not contain guess \(guess)")
+        }
+        updateWordLabel()
         sender.backgroundColor = UIColor.grayColor()
         sender.enabled = false
         self.view.layoutIfNeeded()
