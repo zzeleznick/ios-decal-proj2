@@ -21,14 +21,16 @@ class GameViewController: UIViewController {
     var bottomButtonConstraint: NSLayoutConstraint!
     
     // MARK: - Storyboard Connections
-    @IBOutlet weak var letterContainer: UIView!
     @IBOutlet weak var hangmanContainer: UIView!
+    @IBOutlet weak var letterContainer: UIView!
     @IBOutlet weak var statsContainer: UIView!
+    @IBOutlet weak var wordView: UIView!
     
     @IBOutlet weak var commonLabel: UILabel!
     @IBOutlet weak var vowelLabel: UILabel!
     @IBOutlet weak var uncommonLabel: UILabel!
     
+    @IBOutlet weak var wordToGuess: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,7 @@ class GameViewController: UIViewController {
         makeVowelButtons()
         makeCommonButtons()
         makeUncommonButtons()
+        wordToGuess?.text = phrase
     }
 
     override func didReceiveMemoryWarning() {
