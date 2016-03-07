@@ -17,7 +17,7 @@ class GameViewController: UIViewController {
     var status: String = "is error"
     var phrase: String = ""
     var guessed: [String] = [" "]
-    let maxTries: Int = 7
+    let maxTries: Int = 6
     var currentTries: Int = 0
     var vowelButtons: [UIButton!]!
     var button2: UIButton!
