@@ -49,9 +49,21 @@ class GameViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    class myButton: UIButton {
+        var content: String = ""
+    }
+    
+    func buttonPressed(sender: myButton) {
+        print("button \(sender.content) pressed")
+        sender.backgroundColor = UIColor.grayColor()
+        sender.enabled = false
+        self.view.layoutIfNeeded()
+        
+    }
+    
     func makeButtons(content: [String], margin: CGFloat, bottom: CGFloat, width: CGFloat = 45.0) {
         for i in 0...content.count-1 {
-            let button: UIButton = UIButton(type: UIButtonType.System)
+            let button: myButton = myButton() //UIButton(type: UIButtonType.System)
             button.setTitle(content[i], forState: UIControlState.Normal)
             button.backgroundColor = UIColor.init(red: 0, green: 0.2, blue: 0.8, alpha: 1)
             button.layer.cornerRadius = 10
@@ -61,6 +73,10 @@ class GameViewController: UIViewController {
             
             button.titleLabel?.font = UIFont.systemFontOfSize(12)
             button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            button.content = content[i]
+            // Set Action for button
+            button.addTarget(self, action: Selector("buttonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
+            
             
             // Add buttons to container
             letterContainer.addSubview(button)
@@ -103,43 +119,6 @@ class GameViewController: UIViewController {
         let bottom: CGFloat = -20
         makeButtons(uncommon, margin: margin, bottom: bottom)
     }
-    
-    
-    func setupButton() {
-        
-        button2 = UIButton(type: UIButtonType.System) // .System
-        
-        button2.setTitle("Animated Layout", forState: UIControlState.Normal)
-        
-        button2.bounds = CGRect(x: 0, y: 0, width: 300, height: 80)
-        // button2.center = CGPoint(x: view.bounds.width / 2, y: 300) // 80 point button, 20 point status bar, 40 point half button, 8 point margins
-        
-        button2.setBackgroundImage(UIImage(named: "BlueButton"), forState: UIControlState.Normal)
-        
-        button2.titleLabel?.font = UIFont.systemFontOfSize(17)
-        button2.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        
-        // Hide button to start
-        
-        button2.alpha = 0
-        
-        view.addSubview(button2)
-        
-        // Disable Autoresizing constraints
-        button2.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        // Auto Layout Rules
-        let leftEdge = NSLayoutConstraint(item: button2, attribute: NSLayoutAttribute.LeadingMargin, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.LeadingMargin, multiplier: 1.0, constant: 10)
-        let rightEdge = NSLayoutConstraint(item: button2, attribute: NSLayoutAttribute.TrailingMargin, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.TrailingMargin, multiplier: 1.0, constant: -10)
-        // add all constraints
-        bottomButtonConstraint = NSLayoutConstraint(item: button2, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: 100)
-        
-        
-        view.addConstraints([leftEdge, rightEdge, bottomButtonConstraint])
-        
-    }
-
     
 
     /*
