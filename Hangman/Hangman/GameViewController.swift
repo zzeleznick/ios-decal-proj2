@@ -22,6 +22,9 @@ class GameViewController: UIViewController {
     
     // MARK: - Storyboard Connections
     @IBOutlet weak var letterContainer: UIView!
+    @IBOutlet weak var hangmanContainer: UIView!
+    @IBOutlet weak var statsContainer: UIView!
+    
     @IBOutlet weak var commonLabel: UILabel!
     @IBOutlet weak var vowelLabel: UILabel!
     @IBOutlet weak var uncommonLabel: UILabel!
@@ -62,7 +65,7 @@ class GameViewController: UIViewController {
             // Disable Autoresizing constraints
             button.translatesAutoresizingMaskIntoConstraints = false
             let space: CGFloat = width + margin
-            let left: CGFloat = 5 + space * CGFloat(i)
+            let left: CGFloat = 20 + space * CGFloat(i)
             
             // Auto Layout Rules
             let leftEdge = NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.LeadingMargin, relatedBy: NSLayoutRelation.Equal, toItem: letterContainer, attribute: NSLayoutAttribute.LeadingMargin, multiplier: 1.0, constant: left)
@@ -78,22 +81,22 @@ class GameViewController: UIViewController {
     }
     
     func makeVowelButtons() {
-        let margin: CGFloat = 10
-        let bottom: CGFloat = -220
+        let margin: CGFloat = 12
+        let bottom: CGFloat = -255
         makeButtons(vowels, margin: margin, bottom: bottom)
     }
     
     func makeCommonButtons() {
-        let margin: CGFloat = 6
+        let margin: CGFloat = 8
         let width: CGFloat = 40
-        let bottom1: CGFloat = -140
-        let bottom2: CGFloat = -95
+        let bottom1: CGFloat = -170
+        let bottom2: CGFloat = -110
         makeButtons(commons1, margin: margin, bottom: bottom1, width: width)
         makeButtons(commons2, margin: margin, bottom: bottom2, width: width)
     }
     
     func makeUncommonButtons() {
-        let margin: CGFloat = 10
+        let margin: CGFloat = 12
         let bottom: CGFloat = -20
         makeButtons(uncommon, margin: margin, bottom: bottom)
     }
